@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ["500", "600", "700"],
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800"],
 });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 
 const title = "TopTier Study — Barrister-Led Study Abroad from Bangladesh";
 
@@ -29,12 +29,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a1c3c",
+  themeColor: "#8a6cff",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} antialiased`}>
+    <html lang="en" className={`${poppins.variable} ${jakarta.variable} antialiased`}>
       <body className="min-h-screen">{children}</body>
     </html>
   );

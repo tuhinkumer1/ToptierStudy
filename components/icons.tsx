@@ -13,7 +13,34 @@ const base = {
 export const ArrowRight = ({ className }: P) => (
   <svg {...base} className={className}><path d="M5 12h14M13 6l6 6-6 6" /></svg>
 );
-export const Phone = ({ className }: P) => (
+export const ArrowUpRight = ({ className }: P) => (
+  <svg {...base} strokeWidth={1.8} className={className}><path d="M7 17 17 7M8 7h9v9" /></svg>
+);
+
+/* Decorative paper plane (filled, two-tone) */
+export const PaperPlane = ({ className }: P) => (
+  <svg viewBox="0 0 120 90" aria-hidden className={className}>
+    <path d="M2 40 118 2 70 86 52 56Z" fill="#ffffff" />
+    <path d="M52 56 118 2 40 62Z" fill="#141938" />
+    <path d="M40 62 52 56 46 78Z" fill="#141938" />
+    <path d="M2 40 118 2 52 56Z" fill="#ece6ff" />
+  </svg>
+);
+
+/* Decorative dotted swirl */
+export const Swirl = ({ className, dash = "2 7" }: P & { dash?: string }) => (
+  <svg viewBox="0 0 220 120" fill="none" aria-hidden className={className}>
+    <path
+      d="M2 110C40 108 70 92 92 70c26-26 10-62-16-58-24 4-22 40 6 48 34 10 74-18 136-52"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeDasharray={dash}
+    />
+  </svg>
+);
+
+export const Phone =({ className }: P) => (
   <svg {...base} className={className}><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></svg>
 );
 export const Mail = ({ className }: P) => (

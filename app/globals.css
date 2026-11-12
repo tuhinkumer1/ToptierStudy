@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-950: #061229;
-  --color-navy-900: #0a1c3c;
-  --color-navy-800: #11284f;
-  --color-navy-700: #1b3766;
-  --color-gold-300: #e6cf86;
-  --color-gold-400: #d9b85a;
-  --color-gold-500: #c49a2c;
-  --color-gold-600: #a37e1c;
-  --color-cream: #f7f3ea;
-  --color-ink: #18202e;
-  --color-muted: #5b6475;
+  /* Violet / lavender playful palette */
+  --color-ink: #141938;
+  --color-ink-soft: #4a4f6e;
+  --color-violet-300: #c9b8ff;
+  --color-violet-400: #a48bff;
+  --color-violet-500: #8a6cff;
+  --color-violet-600: #7451f5;
+  --color-violet-700: #5b3bd6;
+  --color-orchid-400: #d27dff;
+  --color-orchid-500: #c061f5;
+  --color-lilac-50: #f6f3ff;
+  --color-lilac-100: #ece6ff;
+  --color-blush-200: #fbd3e6;
+  --color-blush-300: #f8b4d4;
 
-  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-poppins), system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), var(--font-poppins), system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 :root {
@@ -31,9 +34,39 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Anchor targets clear the sticky header */
 section[id] {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 6rem;
+}
+
+/* Gradient-highlighted word */
+.text-grad {
+  background-image: linear-gradient(95deg, #7a5cff 0%, #a86bff 45%, #d27dff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-grad {
+  background-image: linear-gradient(95deg, #8a6cff 0%, #b46dff 100%);
+}
+
+/* Soft hero wash: lavender → periwinkle → blush */
+.bg-hero-wash {
+  background:
+    radial-gradient(60% 70% at 85% 30%, rgba(248, 180, 212, 0.55) 0%, transparent 60%),
+    radial-gradient(50% 60% at 10% 85%, rgba(248, 180, 212, 0.45) 0%, transparent 60%),
+    radial-gradient(70% 80% at 0% 0%, rgba(164, 196, 255, 0.7) 0%, transparent 60%),
+    linear-gradient(120deg, #d9dcff 0%, #ece4ff 45%, #f9e3f1 100%);
+}
+
+/* Outer page frame (purple / lavender split, like a showcase canvas) */
+.bg-canvas {
+  background: linear-gradient(90deg, #8478ff 0%, #8f7dff 60%, #e6e1ff 60%, #ebe7ff 100%);
+}
+
+/* Speech bubble tail */
+.bubble-tail {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 /* FAQ disclosure marker */
@@ -47,8 +80,24 @@ details[open] .faq-icon {
   transform: rotate(45deg);
 }
 
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-floaty {
+  animation: floaty 5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .animate-floaty {
+    animation: none;
   }
 }
