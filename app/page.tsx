@@ -1,4 +1,7 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
+import studentOne from "@/public/hero/student-1.png";
+import studentTwo from "@/public/hero/student-2.png";
 import {
   banners,
   credentials,
@@ -279,39 +282,38 @@ function Header() {
   );
 }
 
-function ScoreCard() {
-  const bands = [
-    { k: "Listening", v: 8.0 },
-    { k: "Reading", v: 7.5 },
-    { k: "Writing", v: 7.0 },
-    { k: "Speaking", v: 7.5 },
-  ];
+/** Dotted arc of white dots behind the students (decorative) */
+function DotArc({ className = "" }: { className?: string }) {
+  const dots = Array.from({ length: 26 }, (_, i) => {
+    const t = i / 25;
+    const a = Math.PI * (0.95 + t * 0.75);
+    return { x: 200 + Math.cos(a) * 170, y: 220 + Math.sin(a) * 170, r: 3 + t * 6 };
+  });
   return (
-    <div className="relative w-full max-w-[19rem] rounded-[1.75rem] bg-white p-5 shadow-2xl sm:p-6 shadow-violet-900/20">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Mock test · IELTS</p>
-          <p className="font-display text-sm font-semibold text-ink">Sample result</p>
-        </div>
-        <span className="rounded-full bg-lilac-100 px-2.5 py-1 text-xs font-semibold text-violet-700">AI scored</span>
-      </div>
-      <div className="mt-5 flex items-end gap-2">
-        <span className="text-grad font-display text-6xl font-extrabold leading-none">7.5</span>
-        <span className="pb-1.5 text-sm text-ink-soft">Overall band</span>
-      </div>
-      <ul className="mt-5 space-y-3">
-        {bands.map((b) => (
-          <li key={b.k}>
-            <div className="flex justify-between text-sm">
-              <span className="text-ink-soft">{b.k}</span>
-              <span className="font-display font-semibold text-ink">{b.v.toFixed(1)}</span>
-            </div>
-            <div className="mt-1 h-2 rounded-full bg-lilac-100">
-              <div className="bg-grad h-2 rounded-full" style={{ width: `${(b.v / 9) * 100}%` }} />
-            </div>
-          </li>
+    <svg viewBox="0 0 400 400" aria-hidden className={className}>
+      {dots.map((d, i) => (
+        <circle key={i} cx={d.x.toFixed(1)} cy={d.y.toFixed(1)} r={d.r.toFixed(1)} fill="#fff" opacity={0.9} />
+      ))}
+    </svg>
+  );
+}
+
+/** Tilted "Study Abroad" sticker with colourful book spines */
+function StudySticker() {
+  const spines = ["bg-[#2fb6e9]", "bg-[#f0504a]", "bg-[#ffb02e]", "bg-[#22c39a]", "bg-[#8a6cff]", "bg-[#e14a8c]"];
+  return (
+    <div className="relative w-fit -rotate-[8deg] rounded-[2.2rem] bg-white px-7 pb-5 pt-4 shadow-xl shadow-violet-900/10">
+      <div className="flex items-end gap-1">
+        {spines.map((c, i) => (
+          <span key={c} className={`w-3.5 rounded-t-md ${c}`} style={{ height: `${26 + ((i * 7) % 18)}px` }} />
         ))}
-      </ul>
+        <PaperPlane className="ml-2 w-10 -rotate-12" />
+      </div>
+      <p className="mt-2 font-display text-2xl font-bold leading-tight text-ink">
+        Study
+        <br />
+        Abroad
+      </p>
     </div>
   );
 }
@@ -321,14 +323,13 @@ function Hero() {
     <section id="top" className="relative -mt-[5.25rem] overflow-hidden pt-[5.25rem]">
       <div className="bg-hero-wash absolute inset-0" />
       {/* dotted line leading into headline */}
-      <span aria-hidden className="absolute left-0 top-[42%] hidden h-1 w-[6%] border-t-4 border-dotted border-ink/60 xl:block" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-14 sm:px-8 lg:grid-cols-[1.15fr_1fr] lg:pb-28 lg:pt-20">
-        <div>
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 text-sm font-medium text-violet-700 backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-violet-500" />
-            Barrister-led study abroad · Banani, Dhaka
-          </p>
-          <h1 className="font-display text-[2.6rem] font-bold leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-[4.2rem]">
+      <span aria-hidden className="absolute left-0 top-[36%] hidden h-1 w-[6%] border-t-4 border-dotted border-ink/70 xl:block" />
+      <Swirl className="absolute right-[2%] top-[12%] hidden w-44 text-ink/70 lg:block" />
+
+      <div className="relative mx-auto grid max-w-7xl gap-6 px-5 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-0">
+        {/* Copy */}
+        <div className="pb-6 pt-14 lg:pb-24 lg:pt-24">
+          <h1 className="font-display text-[2.5rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[3.4rem] lg:text-[3.9rem]">
             Your Global Future, Handled With <span className="text-grad">Legal Precision</span>
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink/85 sm:text-xl">
@@ -341,34 +342,36 @@ function Hero() {
               Book a free consultation
             </SplitBtn>
           </div>
-          <dl className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <dt className="sr-only">{s.label}</dt>
-                <dd className="font-display text-3xl font-bold text-ink">{s.value}</dd>
-                <dd className="text-sm text-ink-soft">{s.label}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="mt-14 hidden pl-16 lg:block">
+            <StudySticker />
+          </div>
         </div>
 
-        {/* Visual composition */}
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-[34rem] sm:aspect-square">
-          <div className="absolute inset-[8%] rounded-full bg-gradient-to-br from-violet-400/40 via-orchid-400/30 to-blush-300/50 blur-2xl" />
-          <div className="absolute inset-[14%] rounded-full border-2 border-dashed border-white/70" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="animate-floaty w-[60%] sm:min-w-[15rem]">
-              <ScoreCard />
-            </div>
+        {/* Students + greeting bubbles */}
+        <div className="relative h-[26rem] self-end sm:h-[34rem] lg:h-[40rem]">
+          <DotArc className="absolute bottom-[14%] left-[22%] w-[78%] opacity-90" />
+          <Image
+            src={studentTwo}
+            alt="Student carrying a stack of books and a backpack"
+            sizes="(min-width: 1024px) 30vw, 55vw"
+            className="absolute bottom-0 right-[-14%] z-10 h-[64%] w-auto object-contain object-bottom sm:right-[-10%] lg:right-[-12%]"
+            loading="eager"
+          />
+          <Image
+            src={studentOne}
+            alt="Smiling student holding notebooks"
+            sizes="(min-width: 1024px) 34vw, 60vw"
+            className="absolute bottom-0 left-[-6%] z-20 h-[86%] w-auto object-contain object-bottom sm:left-[0%]"
+            loading="eager"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 z-30">
+            <Bubble text="Bonjour" swatch={swatches[0]} size="sm" className="left-[2%] top-[10%] sm:left-[6%] sm:top-[12%] sm:[&>div]:text-lg" tail="right" />
+            <Bubble text="Salut" swatch={swatches[1]} className="left-[40%] top-0 sm:left-[44%] sm:top-[2%] sm:[&>div]:text-2xl" />
+            <Bubble text="Hello" swatch={swatches[2]} className="right-[2%] top-[8%] sm:right-[4%] sm:top-[8%] sm:[&>div]:px-6 sm:[&>div]:py-3 sm:[&>div]:text-3xl" />
+            <Bubble text="Hola" swatch={swatches[3]} round className="left-[-2%] top-[44%] w-14 sm:left-[0%] sm:w-[4.5rem]" tail="right" />
+            <Bubble text="你好" swatch={swatches[4]} round className="right-[2%] top-[23%] w-14 sm:right-[3%] sm:top-[22%] sm:w-20 sm:[&>div]:text-xl" />
           </div>
-          <Bubble text="IELTS" swatch={swatches[1]} size="lg" className="right-[2%] top-0 sm:right-[6%] sm:top-[2%]" />
-          <Bubble text="PTE" swatch={swatches[0]} className="left-[2%] top-[3%] sm:left-[6%] sm:top-[12%]" tail="right" />
-          <Bubble text="TOEFL" swatch={swatches[2]} className="right-0 top-[44%] sm:right-[-4%] sm:top-[34%]" />
-          <Bubble text="DET" swatch={swatches[3]} round className="left-[0%] top-[46%] w-16" tail="right" />
-          <Bubble text="UK" swatch={swatches[4]} round className="bottom-[2%] right-[6%] w-16 sm:bottom-[10%] sm:right-[4%]" />
-          <Bubble text="Band 7+" swatch={swatches[5]} size="sm" className="bottom-[1%] left-[4%] sm:bottom-[4%] sm:left-[14%]" />
-          <PaperPlane className="absolute -top-2 left-[30%] hidden w-24 rotate-[-8deg] drop-shadow-lg sm:block" />
-          <Swirl className="absolute -right-6 bottom-[26%] hidden w-40 text-ink/70 sm:block" />
         </div>
       </div>
     </section>
@@ -385,6 +388,15 @@ function Why() {
           grad="TopTier Study"
           sub="Strong students lose great offers over one wrong document or one missed deadline. With a barrister leading the team, your file is prepared the way a legal case is — complete, consistent and on time."
         />
+        <dl className="mt-10 flex flex-wrap gap-4">
+          {stats.map((st) => (
+            <div key={st.label} className="rounded-2xl bg-lilac-50 px-6 py-4">
+              <dt className="sr-only">{st.label}</dt>
+              <dd className="text-grad font-display text-3xl font-bold">{st.value}</dd>
+              <dd className="text-sm text-ink-soft">{st.label}</dd>
+            </div>
+          ))}
+        </dl>
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {pillars.map((p, i) => {
             const Icon = pillarIcons[i];
