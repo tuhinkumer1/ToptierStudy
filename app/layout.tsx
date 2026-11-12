@@ -1,14 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Poppins } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const poppins = Poppins({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-jakarta",
   weight: ["400", "500", "600", "700", "800"],
 });
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 
 const title = "TopTier Study — Barrister-Led Study Abroad from Bangladesh";
 
@@ -29,12 +28,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#8a6cff",
+  themeColor: "#5c55dc",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${poppins.variable} ${jakarta.variable} antialiased`}>
+    <html lang="en" className={`${jakarta.variable} antialiased`}>
       <body className="min-h-screen">{children}</body>
     </html>
   );

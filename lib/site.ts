@@ -63,6 +63,36 @@ export const banners = {
   },
 };
 
+// Test catalogue on TopTier Academy (all included in the platform).
+export type TestGroup = "english" | "professional" | "admissions";
+
+export const testGroups: { id: "all" | TestGroup; label: string }[] = [
+  { id: "all", label: "All Tests" },
+  { id: "english", label: "English" },
+  { id: "professional", label: "Professional" },
+  { id: "admissions", label: "Admissions" },
+];
+
+export const tests: {
+  code: string;
+  name: string;
+  tag: string;
+  tone: "amber" | "blue" | "rose" | "emerald" | "violet";
+  group: TestGroup;
+  body: string;
+  feature: string;
+  href: string;
+}[] = [
+  { code: "IELTS", name: "IELTS Preparation", tag: "Most popular", tone: "amber", group: "english", body: "Academic and General Training practice with AI feedback on Writing and Speaking.", feature: "Free mock test", href: site.academy.freeTest },
+  { code: "PTE", name: "PTE Academic", tag: "AI scored", tone: "blue", group: "english", body: "Full PTE practice in the real exam format with instant scoring.", feature: "Free mock test", href: site.academy.freeTest },
+  { code: "TOEFL", name: "TOEFL iBT", tag: "US universities", tone: "rose", group: "english", body: "Reading, listening, speaking and writing practice for TOEFL iBT.", feature: "Section practice", href: site.academy.allPrep },
+  { code: "DET", name: "Duolingo English Test", tag: "Online test", tone: "emerald", group: "english", body: "Adaptive practice for the Duolingo English Test, anytime on any device.", feature: "Section practice", href: site.academy.allPrep },
+  { code: "OET", name: "OET", tag: "Healthcare", tone: "rose", group: "professional", body: "English test practice for doctors, nurses and healthcare professionals.", feature: "Full practice", href: site.academy.home },
+  { code: "CEL", name: "CELPIP", tag: "Canada", tone: "blue", group: "professional", body: "Practice for Canada's general English test used for immigration.", feature: "Full practice", href: site.academy.home },
+  { code: "GRE", name: "GRE & GMAT", tag: "Graduate", tone: "violet", group: "admissions", body: "Quant, verbal and writing practice for master's and MBA admissions.", feature: "Full practice", href: site.academy.home },
+  { code: "SAT", name: "SAT", tag: "Undergraduate", tone: "amber", group: "admissions", body: "Practice for undergraduate admissions in the USA.", feature: "Full practice", href: site.academy.home },
+];
+
 export const stats = [
   { value: "2014", label: "Established" },
   { value: "250+", label: "Global university partners" },
