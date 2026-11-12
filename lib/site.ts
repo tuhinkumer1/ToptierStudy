@@ -27,6 +27,12 @@ export const site = {
     youtube: "https://www.youtube.com/@TopTierEducationConsultant",
   },
 
+  // Parent consultancy website (no "www." — that host doesn't resolve)
+  consultant: {
+    url: "https://toptiereducationconsultant.com",
+    label: "toptiereducationconsultant.com",
+  },
+
   // Exam-prep portal (white-label, served on our subdomain)
   academy: {
     home: ACADEMY,
@@ -39,6 +45,23 @@ export const site = {
     calculator: `${ACADEMY}/immigration/calculator/`,
   },
 } as const;
+
+// Top-of-page banners. Edit text/links here to change the offers.
+export const banners = {
+  mockTest: {
+    badge: "Free",
+    text: "IELTS & PTE full mock test — real exam timing, instant feedback",
+    short: "IELTS & PTE mock test",
+    cta: "Take it free",
+    href: site.academy.freeTest,
+  },
+  consultant: {
+    text: "Planning to study abroad? Visit TopTier Education Consultant",
+    short: "Visit TopTier Education Consultant",
+    cta: site.consultant.label,
+    href: site.consultant.url,
+  },
+};
 
 export const stats = [
   { value: "2014", label: "Established" },

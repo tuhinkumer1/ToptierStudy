@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import {
+  banners,
   credentials,
   destinations,
   faqs,
@@ -84,6 +85,45 @@ function Btn({
     >
       {children}
     </a>
+  );
+}
+
+function TopBanners() {
+  const { mockTest, consultant } = banners;
+  return (
+    <div className="grid text-sm md:grid-cols-2">
+      <a
+        href={mockTest.href}
+        className="group flex items-center justify-center gap-3 bg-gold-500 px-4 py-2.5 text-navy-950 transition-colors hover:bg-gold-400"
+      >
+        <span className="shrink-0 rounded-full bg-navy-950 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-gold-300">
+          {mockTest.badge}
+        </span>
+        <span className="min-w-0 truncate font-medium">
+          <span className="xl:hidden">{mockTest.short}</span>
+          <span className="hidden xl:inline">{mockTest.text}</span>
+        </span>
+        <span className="inline-flex shrink-0 items-center gap-1 font-semibold underline-offset-4 group-hover:underline">
+          <span className="hidden sm:inline">{mockTest.cta}</span>
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </span>
+      </a>
+      <a
+        href={consultant.href}
+        {...ext}
+        className="group flex items-center justify-center gap-3 border-t border-white/10 bg-navy-800 px-4 py-2.5 text-white transition-colors hover:bg-navy-700 md:border-t-0"
+      >
+        <Cap className="h-5 w-5 shrink-0 text-gold-400" />
+        <span className="min-w-0 truncate">
+          <span className="xl:hidden">{consultant.short}</span>
+          <span className="hidden xl:inline">{consultant.text}</span>
+        </span>
+        <span className="inline-flex shrink-0 items-center gap-1 font-semibold text-gold-300 underline-offset-4 group-hover:underline">
+          <span className="hidden min-[1400px]:inline">{consultant.cta}</span>
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </span>
+      </a>
+    </div>
   );
 }
 
@@ -621,6 +661,7 @@ function FloatingWhatsApp() {
 export default function Page() {
   return (
     <>
+      <TopBanners />
       <Header />
       <main>
         <Hero />
