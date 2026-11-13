@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import studentsDuo from "@/public/hero/students-duo.png";
 import studentBubble from "@/public/hero/student-bubble.png";
+import toptierMark from "@/public/brand/toptier-mark.png";
 import TestCatalog from "@/components/TestCatalog";
 import {
   banners,
@@ -177,21 +178,18 @@ function TopBanners() {
   );
 }
 
+/** Official TopTier "TT" mark (from toptierconsultant.com) + "TopTier STUDY" wordmark */
 function Logo({ light = false }: { light?: boolean }) {
-  const ink = light ? "#ffffff" : "#1b1b38";
-  const cut = light ? "#1b1b38" : "#ffffff";
   return (
-    <a href="#top" className="group flex items-center gap-3">
-      <svg fill="none" height="38" viewBox="0 0 44 40" width="42" aria-hidden>
-        <path d="M22 3L2 14L22 23L42 14L22 3Z" fill={ink} />
-        <path d="M37 17.5V26.5C37 26.5 35 30 22 30C9 30 7 26.5 7 26.5V17.5" stroke={ink} strokeLinecap="round" strokeWidth="3" />
-        <path d="M22 25C26 25 31 22 35 19V32C31 34 26 35 22 35C18 35 13 34 9 32V19C13 22 18 25 22 25Z" fill={ink} />
-        <ellipse cx="22" cy="14" rx="7" ry="5" stroke={cut} strokeWidth="1.2" />
-        <line stroke={cut} strokeWidth="1.2" x1="22" x2="22" y1="9" y2="19" />
-      </svg>
+    <a href="#top" className="group flex items-center gap-2.5" aria-label="TopTier Study home">
+      <Image src={toptierMark} alt="" width={44} height={44} className="h-11 w-11" />
       <div className="flex flex-col">
-        <span className={`text-lg font-extrabold leading-none tracking-tight ${light ? "text-white" : "text-slate-900"}`}>TopTier</span>
-        <span className={`text-[10px] font-bold uppercase tracking-wider ${light ? "text-violet-300" : "text-violet-600"}`}>Study</span>
+        <span className={`text-xl font-extrabold leading-none tracking-tight ${light ? "text-white" : "text-[#0d1d5f]"}`}>
+          TopTier
+        </span>
+        <span className={`mt-0.5 text-[11px] font-bold uppercase tracking-[0.2em] ${light ? "text-[#7fb5ff]" : "text-[#2a85f5]"}`}>
+          Study
+        </span>
       </div>
     </a>
   );
